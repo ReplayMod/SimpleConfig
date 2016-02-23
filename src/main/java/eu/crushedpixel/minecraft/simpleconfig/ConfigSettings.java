@@ -32,6 +32,38 @@ import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A wrapper around a Configuration object allowing for simple writing and reading of
+ * Integer, Double, Boolean and String values in a Configuration File.<br>
+ * <br>
+ * To create your own ConfigSettings object, simply extend this class, adding fields that extend {@link Setting}. <br>
+ * Example code:<br>
+ * <pre>
+ * <code>public class MyConfigSettings {
+ *
+ *         public IntegerSetting integerSetting = new IntegerSetting(initialIntValue);
+ *         public StringSetting stringSetting = new StringSetting(initialStringValue);
+ *
+ *         //registering settings without an explicit default value.
+ *         //The default values specified by {@link BooleanSetting} and {@link DoubleSetting} will be used.
+ *         public BooleanSetting booleanSetting;
+ *         public DoubleSetting doubleSetting;
+ *
+ *         //pass-through constructor
+ *         public MyConfigSettings(Configuration config) {
+ *             super(config);
+ *         }
+ * }</code>
+ * </pre>
+ *
+ * When calling {@link IntegerSetting#setIntValue(int)}, {@link StringSetting#setStringValue(String)} etc., those values
+ * will be automatically written to the Configuration file passed in the constructor.<br>
+ * <br>
+ * <b>Please note</b> that {@link ConfigSettings#init()} has to be called
+ * before any of the setting's values can be accessed or modified.<br>
+ * This is because possible initial values defined in the {@link Setting} field declarations
+ * are not assigned when the constructor is called and would therefore always be overwritten.
+ */
 public abstract class ConfigSettings {
 
     private final Configuration config;
@@ -48,6 +80,12 @@ public abstract class ConfigSettings {
         this.categoryName = categoryName.toLowerCase().trim().replaceAll("\\s", "_");
     }
 
+    /**
+     * Loads the configuration file and assigns it's values to the {@link Setting} fields of this class.<br>
+     * If no value is set in the configuration file, the {@link Setting} object's default value will be used.<br>
+     * <br>
+     * This method has to be called before any of the setting's values can be accessed or modified.
+     */
     public void init() {
         this.settingFields = new HashSet<>();
 
@@ -98,6 +136,9 @@ public abstract class ConfigSettings {
 
     }
 
+    /**
+     * Writes the {@link Setting} field values to the configuration file.
+     */
     public void save() {
         config.removeCategory(config.getCategory(categoryName));
 
