@@ -46,12 +46,16 @@ public abstract class ConfigSettings {
     public ConfigSettings(Configuration config, String categoryName) {
         this.config = config;
         this.categoryName = categoryName.toLowerCase().trim().replaceAll("\\s", "_");
+    }
 
+    public void init() {
         this.settingFields = new HashSet<>();
 
         for(Field f : this.getClass().getDeclaredFields()) {
-            if(f.getType().isAssignableFrom(Setting.class)) {
+            if(Setting.class.isAssignableFrom(f.getType())) {
                 try {
+                    f.setAccessible(true);
+
                     Setting setting = (Setting)f.get(this);
                     if(setting == null) setting = (Setting)f.getType().newInstance();
                     setting.setParent(this);
@@ -116,6 +120,8 @@ public abstract class ConfigSettings {
                 e.printStackTrace();
             }
         }
+
+        config.save();
     }
 
 }

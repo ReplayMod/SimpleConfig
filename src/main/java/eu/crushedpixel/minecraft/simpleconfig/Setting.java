@@ -29,13 +29,19 @@ public abstract class Setting {
 
     private ConfigSettings parent;
 
-    public void setParent(ConfigSettings settings) {
+    public void setParent(ConfigSettings parent) {
         this.parent = parent;
     }
 
     protected Object value;
 
     protected void setValue(Object value) {
+        if(parent == null) {
+            throw new IllegalStateException("No ConfigSettings object has been assigned to this Setting object. " +
+                    "You must call ConfigSettings#init() before modifying the Setting's values.");
+        }
+
+        this.value = value;
         parent.save();
     }
 
