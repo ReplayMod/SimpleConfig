@@ -36,10 +36,7 @@ public abstract class Setting {
     protected Object value;
 
     protected void setValue(Object value) {
-        if(parent == null) {
-            throw new IllegalStateException("No ConfigSettings object has been assigned to this Setting object. " +
-                    "You must call ConfigSettings#init() before modifying the Setting's values.");
-        }
+        checkBound();
 
         this.value = value;
         parent.save();
@@ -47,6 +44,12 @@ public abstract class Setting {
 
     public Object getValue() {
         return value;
+    }
+
+    protected void checkBound() {
+        if(parent == null)
+            throw new IllegalStateException("No ConfigSettings object has been assigned to this Setting object. " +
+                    "You must call ConfigSettings#init() before modifying the Setting's values.");
     }
 
 }

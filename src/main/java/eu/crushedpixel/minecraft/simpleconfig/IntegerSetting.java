@@ -38,6 +38,7 @@ public class IntegerSetting extends Setting {
     }
 
     public int getIntValue() {
+        checkBound();
         return value == null ? defaultValue : (int)value;
     }
 

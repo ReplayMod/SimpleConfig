@@ -38,6 +38,7 @@ public class DoubleSetting extends Setting {
     }
 
     public double getDoubleValue() {
+        checkBound();
         return value == null ? defaultValue : (double)value;
     }
 

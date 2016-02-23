@@ -38,6 +38,7 @@ public class StringSetting extends Setting {
     }
 
     public String getStringValue() {
+        checkBound();
         return value == null ? defaultValue : (String)value;
     }
 

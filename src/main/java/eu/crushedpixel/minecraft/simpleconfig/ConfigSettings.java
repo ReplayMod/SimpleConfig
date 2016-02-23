@@ -99,7 +99,6 @@ public abstract class ConfigSettings {
     }
 
     public void save() {
-        config.load();
         config.removeCategory(config.getCategory(categoryName));
 
         for(Field f : settingFields) {

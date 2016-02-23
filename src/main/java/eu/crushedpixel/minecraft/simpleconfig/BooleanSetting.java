@@ -38,6 +38,7 @@ public class BooleanSetting extends Setting {
     }
 
     public boolean getBooleanValue() {
+        checkBound();
         return value == null ? defaultValue : (boolean)value;
     }
 
