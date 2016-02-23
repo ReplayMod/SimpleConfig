@@ -40,6 +40,21 @@ minecraft {
     mappings = "snapshot_nodoc_20141130"
 }
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+
+test {
+    testLogging {
+        events 'started', 'passed'
+    }
+}
+
 license {
     ext.name = project.projectName
     ext.author = project.author
