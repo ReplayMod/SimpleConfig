@@ -39,7 +39,6 @@ public abstract class Setting {
         checkBound();
 
         this.value = value;
-        parent.save();
     }
 
     public Object getValue() {
