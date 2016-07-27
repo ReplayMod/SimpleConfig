@@ -25,24 +25,9 @@
 
 package eu.crushedpixel.minecraft.simpleconfig;
 
-public class DoubleSetting extends Setting {
+public class DoubleSetting extends Setting<Double> {
 
-    private double defaultValue;
-
-    public DoubleSetting() {
-        this(0);
-    }
-
-    public DoubleSetting(double defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    public double getDoubleValue() {
-        checkBound();
-        return value == null ? defaultValue : (double)value;
-    }
-
-    public void setDoubleValue(double value) {
-        setValue(value);
+    public DoubleSetting(Double defaultValue) {
+        super(defaultValue);
     }
 }

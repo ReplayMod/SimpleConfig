@@ -25,25 +25,31 @@
 
 package eu.crushedpixel.minecraft.simpleconfig;
 
-public abstract class Setting {
+public abstract class Setting<T> {
+
+    public Setting(T defaultValue) {
+        this.defaultValue = defaultValue;
+    }
 
     private ConfigSettings parent;
+    protected T value;
+    protected T defaultValue;
 
     public void setParent(ConfigSettings parent) {
         this.parent = parent;
     }
 
-    protected Object value;
-
-    protected void setValue(Object value) {
+    public void setValue(T value) {
         checkBound();
-
         this.value = value;
     }
 
-    public Object getValue() {
-        return value;
+    public T getValue() {
+        checkBound();
+        return value == null ? defaultValue : value;
     }
+
+    public T getDefault() { return defaultValue; }
 
     protected void checkBound() {
         if(parent == null)

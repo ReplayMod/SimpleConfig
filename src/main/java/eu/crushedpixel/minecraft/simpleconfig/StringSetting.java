@@ -25,24 +25,9 @@
 
 package eu.crushedpixel.minecraft.simpleconfig;
 
-public class StringSetting extends Setting {
-
-    private String defaultValue;
-
-    public StringSetting() {
-        this(null);
-    }
+public class StringSetting extends Setting<String> {
 
     public StringSetting(String defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    public String getStringValue() {
-        checkBound();
-        return value == null ? defaultValue : (String)value;
-    }
-
-    public void setStringValue(String value) {
-        setValue(value);
+        super(defaultValue);
     }
 }

@@ -25,24 +25,9 @@
 
 package eu.crushedpixel.minecraft.simpleconfig;
 
-public class IntegerSetting extends Setting {
+public class IntegerSetting extends Setting<Integer> {
 
-    private int defaultValue;
-
-    public IntegerSetting() {
-        this(0);
-    }
-
-    public IntegerSetting(int defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    public int getIntValue() {
-        checkBound();
-        return value == null ? defaultValue : (int)value;
-    }
-
-    public void setIntValue(int value) {
-        setValue(value);
+    public IntegerSetting(Integer defaultValue) {
+        super(defaultValue);
     }
 }

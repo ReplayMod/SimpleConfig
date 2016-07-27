@@ -56,7 +56,7 @@ import java.util.Set;
  * }</code>
  * </pre>
  *
- * When calling {@link IntegerSetting#setIntValue(int)}, {@link StringSetting#setStringValue(String)} etc., those values
+ * When calling {@link Setting#setValue(Object)}, this value
  * will be automatically written to the Configuration file passed in the constructor.<br>
  * <br>
  * <b>Please note</b> that {@link ConfigSettings#init()} has to be called
@@ -120,13 +120,13 @@ public abstract class ConfigSettings {
                     Setting s = (Setting)f.get(this);
 
                     if(s instanceof StringSetting)
-                        ((StringSetting)s).setStringValue(p.getString());
+                        s.setValue(p.getString());
                     else if(s instanceof IntegerSetting)
-                        ((IntegerSetting)s).setIntValue(p.getInt());
+                        s.setValue(p.getInt());
                     else if(s instanceof BooleanSetting)
-                        ((BooleanSetting)s).setBooleanValue(p.getBoolean());
+                        s.setValue(p.getBoolean());
                     else if(s instanceof DoubleSetting)
-                        ((DoubleSetting)s).setDoubleValue(p.getDouble());
+                        s.setValue(p.getDouble());
 
                 } catch(IllegalAccessException e) {
                     e.printStackTrace();
@@ -148,13 +148,13 @@ public abstract class ConfigSettings {
                 if(s.getValue() == null) continue;
 
                 if(s instanceof StringSetting)
-                    config.get(categoryName, f.getName(), ((StringSetting)s).getStringValue());
+                    config.get(categoryName, f.getName(), ((StringSetting)s).getValue());
                 else if(s instanceof IntegerSetting)
-                    config.get(categoryName, f.getName(), ((IntegerSetting)s).getIntValue());
+                    config.get(categoryName, f.getName(), ((IntegerSetting)s).getValue());
                 else if(s instanceof BooleanSetting)
-                    config.get(categoryName, f.getName(), ((BooleanSetting)s).getBooleanValue());
+                    config.get(categoryName, f.getName(), ((BooleanSetting)s).getValue());
                 else if(s instanceof DoubleSetting)
-                    config.get(categoryName, f.getName(), ((DoubleSetting)s).getDoubleValue());
+                    config.get(categoryName, f.getName(), ((DoubleSetting)s).getValue());
 
             } catch(IllegalAccessException e) {
                 e.printStackTrace();

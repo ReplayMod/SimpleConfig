@@ -25,24 +25,9 @@
 
 package eu.crushedpixel.minecraft.simpleconfig;
 
-public class BooleanSetting extends Setting {
+public class BooleanSetting extends Setting<Boolean> {
 
-    private boolean defaultValue;
-
-    public BooleanSetting() {
-        this(false);
-    }
-
-    public BooleanSetting(boolean defaultValue) {
-        this.defaultValue = defaultValue;
-    }
-
-    public boolean getBooleanValue() {
-        checkBound();
-        return value == null ? defaultValue : (boolean)value;
-    }
-
-    public void setBooleanValue(boolean value) {
-        setValue(value);
+    public BooleanSetting(Boolean defaultValue) {
+        super(defaultValue);
     }
 }
