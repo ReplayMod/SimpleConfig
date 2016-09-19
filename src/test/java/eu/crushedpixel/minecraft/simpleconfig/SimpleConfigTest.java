@@ -46,12 +46,12 @@ public class SimpleConfigTest {
 
     private static Configuration config;
 
-    private static int initialIntValue = 9001;
+    private static Integer initialIntValue = 9001;
     private static double initialDoubleValue = 10.31;
     private static String initialStringValue = "?=!ASDF";
     private static boolean initialBooleanValue = true;
 
-    private static int newIntValue = 50;
+    private static Integer newIntValue = 50;
     private static double newDoubleValue = 80.1234;
     private static String newStringValue = "nEwStRiNgVaLuE";
     private static boolean newBooleanValue = false;
@@ -71,7 +71,7 @@ public class SimpleConfigTest {
         //before the ConfigSettings object was initialized
         boolean exception = false;
         try {
-            configSettings.integerSetting.getIntValue();
+            configSettings.integerSetting.getValue();
         } catch(IllegalStateException e) {
             exception = true;
         }
@@ -83,7 +83,7 @@ public class SimpleConfigTest {
         exception = false;
 
         try {
-            configSettings.integerSetting.getIntValue();
+            configSettings.integerSetting.getValue();
         } catch(IllegalStateException e) {
             exception = true;
         }
@@ -93,23 +93,23 @@ public class SimpleConfigTest {
 
     @Test
     public void b_testInitialValues() {
-        assertEquals(initialIntValue, configSettings.integerSetting.getIntValue());
-        assertEquals(initialDoubleValue, configSettings.doubleSetting.getDoubleValue(), 0d);
-        assertEquals(initialStringValue, configSettings.stringSetting.getStringValue());
-        assertEquals(initialBooleanValue, configSettings.booleanSetting.getBooleanValue());
+        assertEquals(initialIntValue, configSettings.integerSetting.getValue());
+        assertEquals(initialDoubleValue, configSettings.doubleSetting.getValue(), 0d);
+        assertEquals(initialStringValue, configSettings.stringSetting.getValue());
+        assertEquals(initialBooleanValue, configSettings.booleanSetting.getValue());
     }
 
     @Test
     public void c_testValueChange() {
-        configSettings.integerSetting.setIntValue(newIntValue);
-        configSettings.doubleSetting.setDoubleValue(newDoubleValue);
-        configSettings.stringSetting.setStringValue(newStringValue);
-        configSettings.booleanSetting.setBooleanValue(newBooleanValue);
+        configSettings.integerSetting.setValue(newIntValue);
+        configSettings.doubleSetting.setValue(newDoubleValue);
+        configSettings.stringSetting.setValue(newStringValue);
+        configSettings.booleanSetting.setValue(newBooleanValue);
 
-        assertEquals(newIntValue, configSettings.integerSetting.getIntValue());
-        assertEquals(newDoubleValue, configSettings.doubleSetting.getDoubleValue(), 0d);
-        assertEquals(newStringValue, configSettings.stringSetting.getStringValue());
-        assertEquals(newBooleanValue, configSettings.booleanSetting.getBooleanValue());
+        assertEquals(newIntValue, configSettings.integerSetting.getValue());
+        assertEquals(newDoubleValue, configSettings.doubleSetting.getValue(), 0d);
+        assertEquals(newStringValue, configSettings.stringSetting.getValue());
+        assertEquals(newBooleanValue, configSettings.booleanSetting.getValue());
     }
 
     @AfterClass
