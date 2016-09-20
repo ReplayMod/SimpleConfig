@@ -116,17 +116,22 @@ public abstract class ConfigSettings {
         for(Field f : settingFields) {
             if(config.hasKey(categoryName, f.getName())) {
                 try {
-                    Property p = config.get(categoryName, f.getName(), "");
                     Setting s = (Setting)f.get(this);
+                    Property p;
 
-                    if(s instanceof StringSetting)
+                    if(s instanceof StringSetting) {
+                        p = config.get(categoryName, f.getName(), ((StringSetting) s).getDefault());
                         s.setValue(p.getString());
-                    else if(s instanceof IntegerSetting)
+                    } else if(s instanceof IntegerSetting) {
+                        p = config.get(categoryName, f.getName(), ((IntegerSetting) s).getDefault());
                         s.setValue(p.getInt());
-                    else if(s instanceof BooleanSetting)
+                    } else if(s instanceof BooleanSetting) {
+                        p = config.get(categoryName, f.getName(), ((BooleanSetting) s).getDefault());
                         s.setValue(p.getBoolean());
-                    else if(s instanceof DoubleSetting)
+                    } else if(s instanceof DoubleSetting) {
+                        p = config.get(categoryName, f.getName(), ((DoubleSetting) s).getDefault());
                         s.setValue(p.getDouble());
+                    }
 
                 } catch(IllegalAccessException e) {
                     e.printStackTrace();
